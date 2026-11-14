@@ -69,8 +69,8 @@ What the checks found:
   items": the `.txt` type declared with `NSIsRelatedItemType`, and an `NSFilePresenter` whose primary item
   is the audio file (verified with `open -a`). It works only for the same base name, so the numbered name
   that avoids overwriting (`note 2.txt`) is not covered; Apple's DTS also advised in 2026 against relying
-  on related items. **Open for M2**: what happens when `note.txt` already exists (a save panel is the
-  candidate). `TextOutput`'s numbered fallback works outside the sandbox only.
+  on related items. What happens when `note.txt` already exists is decided in M2's output item;
+  `TextOutput`'s numbered fallback works outside the sandbox only and goes away there.
 - **Runners.** Only GitHub's `xcode-27` image, a public preview, has the macOS 27 SDK; CI uses it. If it
   turns out unstable, the alternative is a self-hosted runner on a Mac. **WARNING:** a self-hosted runner
   must never serve `pull_request` workflows from forks: a fork's PR runs its own code on that Mac.
@@ -128,9 +128,15 @@ An engine joins the app only if it wins on something the others do not cover.
 - [ ] Language: Italian or English chosen explicitly, default from the system language. Auto-detection is off
   by default: on short voice notes it guesses wrong.
 - [ ] If the engine is Whisper: VAD to cut silence and loop detection on the output.
-- [ ] Output: text in the clipboard and a `.txt` next to the file. **An existing file is never overwritten**.
-  When `<name>.txt` is taken, the sandbox does not allow a numbered name: decide the fallback first (see
-  the M0 findings).
+- [ ] Output: text in the clipboard and a `<name>.txt` next to the file. Verba marks the `.txt` files it
+  writes (an extended attribute, invisible in Finder). When `<name>.txt` exists: if Verba wrote it, it is
+  replaced without asking (a new transcription is what the user wants); if not, Verba asks **before
+  transcribing** whether to replace it or save elsewhere, and never overwrites a file it did not write
+  without that answer. A numbered name (`<name> 2.txt`) is not an option: the sandbox does not allow it
+  (see the M0 findings), so `TextOutput`'s numbered fallback is removed.
+- [ ] **Before building the output on related items, investigate Apple DTS's 2026 advice against relying
+  on them** (see the M0 findings): why, and what Apple recommends instead. The result goes here and is
+  discussed with the maintainer before the output item is built; the fallback is a save panel.
 - [ ] Model download manager (if the engine needs weights): pinned revision, SHA-256 check, progress, resume,
   delete from the app.
 
