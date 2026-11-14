@@ -134,6 +134,9 @@ An engine joins the app only if it wins on something the others do not cover.
   transcribing** whether to replace it or save elsewhere, and never overwrites a file it did not write
   without that answer. A numbered name (`<name> 2.txt`) is not an option: the sandbox does not allow it
   (see the M0 findings), so `TextOutput`'s numbered fallback is removed.
+- [ ] **Before building the output on related items, investigate Apple DTS's 2026 advice against relying
+  on them** (see the M0 findings): why, and what Apple recommends instead. The result goes here and is
+  discussed with the maintainer before the output item is built; the fallback is a save panel.
 - [ ] Model download manager (if the engine needs weights): pinned revision, SHA-256 check, progress, resume,
   delete from the app.
 
