@@ -34,20 +34,37 @@ that completes it.
 ### M0 — Foundations
 
 - [x] Install full Xcode on the development Mac.
-- [ ] Create `App/Verba.xcodeproj` (app target with App Sandbox, Quick Action extension) and
+- [x] Create `App/Verba.xcodeproj` (app target with App Sandbox, Quick Action extension) and
   `Packages/VerbaKit`, as described in `CLAUDE.md`.
-- [ ] CI: build and test on a macOS runner, `swift format lint --strict`; add Swift to the CodeQL matrix and
+- [x] CI: build and test on a macOS runner, `swift format lint --strict`; add Swift to the CodeQL matrix and
   the `swift` ecosystem to Dependabot; make the new checks required in the `main` ruleset.
 - [ ] **Verify the signing plan before building on it**: sign two different builds with the same self-signed
   certificate and check that a granted permission (Speech Recognition) survives the update, and that the
   Finder Quick Action loads.
-- [ ] **Verify the sandbox can write the `.txt` next to the dropped file** (sandbox "related items"), or
+- [x] **Verify the sandbox can write the `.txt` next to the dropped file** (sandbox "related items"), or
   decide where the output goes instead.
-- [ ] **Verify the GitHub macOS runners have an Xcode with the macOS 27 SDK**; if not, decide between a
+- [x] **Verify the GitHub macOS runners have an Xcode with the macOS 27 SDK**; if not, decide between a
   self-hosted runner and lowering the deployment target.
 
 Exit: an empty app builds and launches from CI artifacts on a clean Mac, and the three checks above have a
 written answer here.
+
+What the checks found:
+
+- **Signing.** A self-signed code-signing certificate gives every build the same designated requirement
+  (`identifier "io.github.francescobonizzi.verba" and certificate leaf = H"…"`): verified on two different
+  builds. The certificate and its key must be kept: a new one changes the hash. With the hardened runtime
+  on, a build signed this way crashes at launch, so it stays off. The Quick Action extension registers with
+  the system (`pluginkit -m -i io.github.francescobonizzi.verba.QuickAction`) without the app being in
+  `/Applications`. **Still to verify by hand**, because they need someone at the screen: that a granted
+  Speech Recognition permission survives an update, and that the action shows in Finder's Quick Actions.
+- **Sandbox.** A sandboxed app that receives `note.ogg` can write `note.txt` next to it, through "related
+  items": the `.txt` type declared with `NSIsRelatedItemType`, and an `NSFilePresenter` whose primary item
+  is the audio file (verified with `open -a`). It works only for the same base name, so the numbered name
+  that avoids overwriting (`note 2.txt`) is not covered; Apple's DTS also advised in 2026 against relying
+  on related items. Decide in M2: overwrite `note.txt` after asking, or fall back to a save panel.
+- **Runners.** Only GitHub's `xcode-27` image, a public preview, has the macOS 27 SDK; CI uses it. If it
+  turns out unstable, the alternative is a self-hosted runner on a Mac.
 
 ### M1 — Transcription benchmark
 

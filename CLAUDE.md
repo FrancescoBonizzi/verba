@@ -17,11 +17,13 @@ text, screenshots, images and PDFs to text or Markdown. Free, offline, open sour
 
 ## Layout
 
-The code does not exist yet: milestone M0 in `ROADMAP.md` creates it with this shape. Update this section
-in the same PR that changes it.
+Update this section in the same PR that changes it.
 
-- `App/` — the Xcode project (`Verba.xcodeproj`) with synchronized folders: the app target and the Finder
-  Quick Action extension. A thin shell: UI, permissions, wiring.
+- `App/` — the Xcode project (`Verba.xcodeproj`) with synchronized folders: `App/Verba` (the app) and
+  `App/QuickAction` (the Finder Quick Action, an action extension). A thin shell: UI, permissions, wiring.
+  A file added to those folders is part of the target with no project change. Targets, settings and
+  `Info.plist` keys change through Xcode or `xcodebuild` settings; edit `project.pbxproj` by hand only for
+  a one-line setting, and build after.
 - `Packages/VerbaKit/` — a local Swift package with all the logic (audio decoding, transcription engines,
   OCR, output writing). Testable with `swift test` without the app.
 - `Tools/` — command-line tools for development, such as the engine benchmark. Never shipped.
@@ -34,8 +36,12 @@ Logic goes in `VerbaKit`, not in the app target: what lives in the app can only 
   fails with "Unknown error parsing property list", `swift test` cannot build Swift Testing, and
   `mlx-swift` cannot compile its Metal shaders.
 - Package: `swift build` and `swift test` in `Packages/VerbaKit`. App: `xcodebuild -project App/Verba.xcodeproj -scheme Verba build`.
+- Local builds are signed "to run locally" (ad hoc). The hardened runtime stays off: without notarization it
+  adds nothing, and with a self-signed certificate it makes the Debug build crash at launch (amfid rejects
+  `Verba.debug.dylib`).
+- Both targets are sandboxed; an app extension that is not sandboxed is killed at launch.
 - Formatting: `swift format` (the toolchain's swift-format) with [`.swift-format`](.swift-format). A hook
-  formats every Swift file you edit; CI runs `swift format lint --strict` from M0, when the Swift job lands.
+  formats every Swift file you edit; CI runs `swift format lint --strict`.
 - The Stop hook (`.claude/hooks/final-checks.sh`) checks the files you edited with Edit/Write in the turn
   (not files created through Bash): Swift lint, build and tests of their packages, the app build, workflow
   and shell lint. It does not replace looking at the result: a UI change is verified by
