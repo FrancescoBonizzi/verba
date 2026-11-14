@@ -1,0 +1,14 @@
+.DS_Store
+
+# Xcode
+xcuserdata/
+*.xcuserstate
+DerivedData/
+
+# Swift Package Manager
+.build/
+.swiftpm/
+
+# Benchmark corpora and reports hold private recordings: they live outside the repository.
+Tools/**/corpus/
+Tools/**/reports/

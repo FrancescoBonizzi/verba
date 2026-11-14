@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "allow": [
+      "Bash(swift build:*)",
+      "Bash(swift test:*)",
+      "Bash(swift format:*)",
+      "Bash(xcodebuild:*)",
+      "Bash(actionlint:*)",
+      "Bash(zizmor:*)",
+      "Bash(shellcheck:*)"
+    ]
+  },
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "d=\"$(git rev-parse --absolute-git-dir 2>/dev/null)\" && : >\"$d/claude-edited-files.txt\" 2>/dev/null; exit 0"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$(git rev-parse --show-toplevel)/.claude/hooks/format.sh\"",
+            "timeout": 60,
+            "statusMessage": "Formatting changed file..."
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$(git rev-parse --show-toplevel)/.claude/hooks/final-checks.sh\"",
+            "timeout": 600,
+            "statusMessage": "Building and testing what this turn touched..."
+          }
+        ]
+      }
+    ]
+  }
+}
