@@ -34,8 +34,8 @@ jobs:
 
       - name: Build the app
         # Signed ad hoc, as the project says: no key needed, and the entitlements (the sandbox) are applied, so
-        # the signature check below sees what the real app carries. PRs publish no build: distribution happens
-        # only through the release workflow, the only place that signs with a key.
+        # the signature check below sees what the real app carries. PRs publish no build: distribution will come
+        # only from the release workflow (ROADMAP M5), the only place that will sign with a key.
         run: >-
           xcodebuild -project App/Verba.xcodeproj -scheme Verba -configuration Release
           -destination 'platform=macOS' -derivedDataPath build build
