@@ -53,8 +53,9 @@ What the checks found:
 
 - **Signing.** A self-signed code-signing certificate gives every build the same designated requirement
   (`identifier "io.github.francescobonizzi.verba" and certificate leaf = H"…"`): verified on two different
-  builds. The certificate and its key must be kept: a new one changes the hash. With the hardened runtime
-  on, a build signed this way crashes at launch, so it stays off. The Quick Action extension registers with
+  builds. The certificate and its key must be kept: a new one changes the hash. A Release build with the
+  hardened runtime on launches when signed ad hoc (verified); with the self-signed certificate it is
+  deduced, not yet run. A Debug build with the runtime on crashes at launch, so Debug keeps it off. The Quick Action extension registers with
   the system (`pluginkit -m -i io.github.francescobonizzi.verba.QuickAction`) without the app being in
   `/Applications`. **Still to verify by hand**, because they need someone at the screen: that a granted
   Speech Recognition permission survives an update, and that the action shows in Finder's Quick Actions.
@@ -62,9 +63,11 @@ What the checks found:
   items": the `.txt` type declared with `NSIsRelatedItemType`, and an `NSFilePresenter` whose primary item
   is the audio file (verified with `open -a`). It works only for the same base name, so the numbered name
   that avoids overwriting (`note 2.txt`) is not covered; Apple's DTS also advised in 2026 against relying
-  on related items. Decide in M2: overwrite `note.txt` after asking, or fall back to a save panel.
+  on related items. **Open for M2**: what happens when `note.txt` already exists (a save panel is the
+  candidate). `TextOutput`'s numbered fallback works outside the sandbox only.
 - **Runners.** Only GitHub's `xcode-27` image, a public preview, has the macOS 27 SDK; CI uses it. If it
-  turns out unstable, the alternative is a self-hosted runner on a Mac.
+  turns out unstable, the alternative is a self-hosted runner on a Mac. **WARNING:** a self-hosted runner
+  must never serve `pull_request` workflows from forks: a fork's PR runs its own code on that Mac.
 
 ### M1 — Transcription benchmark
 
@@ -119,8 +122,9 @@ An engine joins the app only if it wins on something the others do not cover.
 - [ ] Language: Italian or English chosen explicitly, default from the system language. Auto-detection is off
   by default: on short voice notes it guesses wrong.
 - [ ] If the engine is Whisper: VAD to cut silence and loop detection on the output.
-- [ ] Output: text in the clipboard and a `.txt` next to the file. **An existing file is never overwritten**:
-  the new one gets a numbered name.
+- [ ] Output: text in the clipboard and a `.txt` next to the file. **An existing file is never overwritten**.
+  When `<name>.txt` is taken, the sandbox does not allow a numbered name: decide the fallback first (see
+  the M0 findings).
 - [ ] Model download manager (if the engine needs weights): pinned revision, SHA-256 check, progress, resume,
   delete from the app.
 
@@ -148,7 +152,8 @@ Exit: the M3 failure set comes out usable, with numbers on time and memory.
 
 ### M5 — Releases
 
-- [ ] A release workflow: build, sign with the self-signed certificate (key in GitHub secrets, used only by
+- [ ] A release workflow: build, sign with the self-signed certificate (imported into a temporary keychain
+  with `security set-key-partition-list`, or codesign stops on a keychain access prompt nobody can click) (key in GitHub secrets, used only by
   that workflow, in a protected environment), zip, SHA-256, build provenance attestation, GitHub Release.
 - [ ] Install notes in the README: first launch, how to verify the archive and the certificate.
 - [ ] `THIRD_PARTY_NOTICES.md` with every dependency and model license (Parakeet's CC-BY-4.0 attribution).

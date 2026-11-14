@@ -3,13 +3,18 @@ import Testing
 
 @testable import VerbaKit
 
-struct TextOutputTests {
+// A class for its deinit: Swift Testing creates one instance per test, so each test cleans its own folder.
+final class TextOutputTests {
     private let directory: URL
 
     init() throws {
         directory = FileManager.default.temporaryDirectory
             .appendingPathComponent("TextOutputTests-\(UUID().uuidString)", isDirectory: true)
         try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
+    }
+
+    deinit {
+        try? FileManager.default.removeItem(at: directory)
     }
 
     @Test func writesBesideTheSourceWithTheSameName() throws {
