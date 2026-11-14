@@ -1,0 +1,505 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		35D6F08B85EBD7C8202BD0E9 /* VerbaKit in Frameworks */ = {isa = PBXBuildFile; productRef = 14F5C45C55AD0B6C8C78A360 /* VerbaKit */; };
+		C8229791C8D8D387768F0803 /* QuickAction.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 49AD8C2E93C024FA83FAE809 /* QuickAction.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		005E613B6142C4618A9DDB62 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 88584B3B948A6D1AE1FD4F35 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 761143AED599162DA5E456ED;
+			remoteInfo = QuickAction;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		0B9A39C340D5181738CE59DD /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				C8229791C8D8D387768F0803 /* QuickAction.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		49AD8C2E93C024FA83FAE809 /* QuickAction.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = QuickAction.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		CDD82377C411A472ED123E99 /* Verba.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Verba.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F0C3C9C8E2621D629F0885BC /* VerbaKit */ = {isa = PBXFileReference; lastKnownFileType = folder; name = VerbaKit; path = ../Packages/VerbaKit; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		9F2095D7ADA60F7F3DF86C82 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = FAAC6D259BF354734E1BEAA5 /* Verba */;
+		};
+		F10AC1B04B5EC4CDEC542893 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 761143AED599162DA5E456ED /* QuickAction */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		A0B400C3E90C84A74124922E /* QuickAction */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				F10AC1B04B5EC4CDEC542893 /* PBXFileSystemSynchronizedBuildFileExceptionSet */,
+			);
+			explicitFileTypes = {
+			};
+			explicitFolders = (
+			);
+			path = QuickAction;
+			sourceTree = "<group>";
+		};
+		C3A72D30407B3D70565297C0 /* Verba */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				9F2095D7ADA60F7F3DF86C82 /* PBXFileSystemSynchronizedBuildFileExceptionSet */,
+			);
+			explicitFileTypes = {
+			};
+			explicitFolders = (
+			);
+			path = Verba;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		684644BCC3F7943FCA19E14D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				35D6F08B85EBD7C8202BD0E9 /* VerbaKit in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1DE319038E49291459829C49 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				F0C3C9C8E2621D629F0885BC /* VerbaKit */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
+		5291077C07CE343EE80F7FC5 = {
+			isa = PBXGroup;
+			children = (
+				1DE319038E49291459829C49 /* Packages */,
+				A0B400C3E90C84A74124922E /* QuickAction */,
+				C3A72D30407B3D70565297C0 /* Verba */,
+				AEB52BEBF0E6B31AA950D7AF /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		AEB52BEBF0E6B31AA950D7AF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				49AD8C2E93C024FA83FAE809 /* QuickAction.appex */,
+				CDD82377C411A472ED123E99 /* Verba.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		761143AED599162DA5E456ED /* QuickAction */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 23274844ECC042AC00B9D929 /* Build configuration list for PBXNativeTarget "QuickAction" */;
+			buildPhases = (
+				C8BE47FA1844CD6DEB9AC2EB /* Sources */,
+				D9AC5D24B1553A6AC2F27F0F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				A0B400C3E90C84A74124922E /* QuickAction */,
+			);
+			name = QuickAction;
+			packageProductDependencies = (
+			);
+			productName = QuickAction;
+			productReference = 49AD8C2E93C024FA83FAE809 /* QuickAction.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		FAAC6D259BF354734E1BEAA5 /* Verba */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C1D29C4EBA6F2058EE9D2981 /* Build configuration list for PBXNativeTarget "Verba" */;
+			buildPhases = (
+				81AF4FC55E99C0C9BAA74960 /* Sources */,
+				DABD6AE848F6A902C81510BB /* Resources */,
+				684644BCC3F7943FCA19E14D /* Frameworks */,
+				0B9A39C340D5181738CE59DD /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5F8AB9F85E276A154F943376 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				C3A72D30407B3D70565297C0 /* Verba */,
+			);
+			name = Verba;
+			packageProductDependencies = (
+				14F5C45C55AD0B6C8C78A360 /* VerbaKit */,
+			);
+			productName = Verba;
+			productReference = CDD82377C411A472ED123E99 /* Verba.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		88584B3B948A6D1AE1FD4F35 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					761143AED599162DA5E456ED = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Manual;
+					};
+					FAAC6D259BF354734E1BEAA5 = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Manual;
+					};
+				};
+			};
+			buildConfigurationList = CB8B248A4B1220191D80A4EC /* Build configuration list for PBXProject "Verba" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+				it,
+			);
+			mainGroup = 5291077C07CE343EE80F7FC5;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				7854D157F74509B9CBFB3702 /* XCLocalSwiftPackageReference "../Packages/VerbaKit" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = AEB52BEBF0E6B31AA950D7AF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FAAC6D259BF354734E1BEAA5 /* Verba */,
+				761143AED599162DA5E456ED /* QuickAction */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D9AC5D24B1553A6AC2F27F0F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DABD6AE848F6A902C81510BB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		81AF4FC55E99C0C9BAA74960 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C8BE47FA1844CD6DEB9AC2EB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		5F8AB9F85E276A154F943376 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 761143AED599162DA5E456ED /* QuickAction */;
+			targetProxy = 005E613B6142C4618A9DDB62 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		1041EE2E68AE1084F3C641FD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Verba/Verba.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = Verba/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.francescobonizzi.verba;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		170D2BEA7F483E4193F566C9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Verba/Verba.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = Verba/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.francescobonizzi.verba;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		185101FC8B82B0B14B32B384 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = QuickAction/QuickAction.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = QuickAction/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.francescobonizzi.verba.QuickAction;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		2B466C054F4C6A6858CFFD58 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 27.0;
+				MARKETING_VERSION = 0.1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
+		8D6D463BC66714337F63D0AD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 27.0;
+				MARKETING_VERSION = 0.1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+		E4AE14347361DCDCEDF2C84A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = QuickAction/QuickAction.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = QuickAction/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.francescobonizzi.verba.QuickAction;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		23274844ECC042AC00B9D929 /* Build configuration list for PBXNativeTarget "QuickAction" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				185101FC8B82B0B14B32B384 /* Debug */,
+				E4AE14347361DCDCEDF2C84A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		C1D29C4EBA6F2058EE9D2981 /* Build configuration list for PBXNativeTarget "Verba" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				170D2BEA7F483E4193F566C9 /* Debug */,
+				1041EE2E68AE1084F3C641FD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		CB8B248A4B1220191D80A4EC /* Build configuration list for PBXProject "Verba" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8D6D463BC66714337F63D0AD /* Debug */,
+				2B466C054F4C6A6858CFFD58 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		7854D157F74509B9CBFB3702 /* XCLocalSwiftPackageReference "../Packages/VerbaKit" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../Packages/VerbaKit;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		14F5C45C55AD0B6C8C78A360 /* VerbaKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = VerbaKit;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 88584B3B948A6D1AE1FD4F35 /* Project object */;
+}

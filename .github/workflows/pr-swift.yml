@@ -1,0 +1,52 @@
+name: PR - Swift
+
+on:
+  pull_request:
+    branches: ["main"]
+
+permissions:
+  contents: read
+
+jobs:
+  # Not filtered by path: a required check that is skipped stays pending and blocks the merge.
+  swift:
+    name: "PR - Swift: lint, test, build"
+    # NOTE: the only GitHub image with the macOS 27 SDK, still a public preview; its default Xcode is 27.
+    # https://github.com/actions/runner-images/issues/14404
+    runs-on: xcode-27
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Show toolchain
+        run: |
+          xcodebuild -version
+          swift --version
+
+      - name: Lint
+        run: swift format lint --strict --recursive --configuration .swift-format Packages App
+
+      - name: Test VerbaKit
+        working-directory: Packages/VerbaKit
+        run: swift test
+
+      - name: Build the app
+        # Signed ad hoc, as the project says: no key needed, and the entitlements (the sandbox) are applied, so
+        # the artifact behaves like the real app. The release workflow is the only place that signs with a key.
+        run: >-
+          xcodebuild -project App/Verba.xcodeproj -scheme Verba -configuration Release
+          -destination 'platform=macOS' -derivedDataPath build build
+
+      - name: Verify the signature and package the app
+        run: |
+          codesign --verify --deep --strict build/Build/Products/Release/Verba.app
+          ditto -c -k --keepParent build/Build/Products/Release/Verba.app Verba.zip
+
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: Verba-${{ github.event.pull_request.head.sha }}
+          path: Verba.zip
+          retention-days: 14
+          if-no-files-found: error

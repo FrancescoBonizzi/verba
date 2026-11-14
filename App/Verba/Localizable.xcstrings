@@ -1,0 +1,16 @@
+{
+  "sourceLanguage": "en",
+  "version": "1.0",
+  "strings": {
+    "Transcription and OCR are coming in the next versions.": {
+      "localizations": {
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trascrizione e OCR arriveranno nelle prossime versioni."
+          }
+        }
+      }
+    }
+  }
+}

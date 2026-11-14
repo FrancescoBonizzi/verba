@@ -12,3 +12,6 @@ DerivedData/
 # Benchmark corpora and reports hold private recordings: they live outside the repository.
 Tools/**/corpus/
 Tools/**/reports/
+
+# Local output of the CI build command
+/build/
