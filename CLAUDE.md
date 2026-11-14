@@ -99,5 +99,8 @@ A test is code to maintain and gate time on every future PR.
 ## Agent configuration
 
 Path-scoped rules in [`.claude/rules/`](.claude/rules/), hooks in [`.claude/settings.json`](.claude/settings.json).
+**Hooks run only while `.claude/hooks/` matches `origin/main`**, so checking out someone else's branch never
+runs their scripts: a branch that changes a hook tests it by running the script by hand. Review a fork's PR
+with `gh pr diff`; checking it out and building it runs its code.
 Update them yourself, in the same PR, when a turn surfaces a trap or a verified fact; say which file you
 touched and why. How to write in them: [`.claude/rules/agent-configuration.md`](.claude/rules/agent-configuration.md).
