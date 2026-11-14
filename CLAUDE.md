@@ -35,9 +35,10 @@ Logic goes in `VerbaKit`, not in the app target: what lives in the app can only 
   `mlx-swift` cannot compile its Metal shaders.
 - Package: `swift build` and `swift test` in `Packages/VerbaKit`. App: `xcodebuild -project App/Verba.xcodeproj -scheme Verba build`.
 - Formatting: `swift format` (the toolchain's swift-format) with [`.swift-format`](.swift-format). A hook
-  formats every Swift file you edit; CI runs `swift format lint --strict`.
-- The Stop hook (`.claude/hooks/final-checks.sh`) builds and tests what the turn touched, and lints
-  workflows and shell scripts. It does not replace looking at the result: a UI change is verified by
+  formats every Swift file you edit; CI runs `swift format lint --strict` from M0, when the Swift job lands.
+- The Stop hook (`.claude/hooks/final-checks.sh`) checks the files you edited with Edit/Write in the turn
+  (not files created through Bash): Swift lint, build and tests of their packages, the app build, workflow
+  and shell lint. It does not replace looking at the result: a UI change is verified by
   running the app and taking a screenshot of every state you changed.
 
 ## Models

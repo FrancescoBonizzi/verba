@@ -17,7 +17,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "d=\"$(git rev-parse --absolute-git-dir 2>/dev/null)\" && : >\"$d/claude-edited-files.txt\" 2>/dev/null; exit 0"
+            "command": "s=$(jq -r '.session_id // empty' 2>/dev/null); case \"$s\" in \"\" | *[!A-Za-z0-9-]*) exit 0 ;; esac; : >\"${TMPDIR:-/tmp}/verba-claude-edited-$s\"; exit 0"
           }
         ]
       }

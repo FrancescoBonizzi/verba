@@ -36,7 +36,8 @@ one is Important.
 
 ## Drop
 
-- What CI already enforces: formatting, build, tests, workflow lint, secret scanning, CodeQL.
+- What a required check of the `main` ruleset already enforces (read the ruleset: a check that only runs
+  does not block a merge).
 - Style, naming that is not misleading, optional refactors, comments to add to readable code.
 - Logging suggestions, unless a failure would go unnoticed.
 - Safe-by-default framework APIs.

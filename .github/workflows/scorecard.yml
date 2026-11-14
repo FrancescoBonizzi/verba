@@ -3,7 +3,7 @@ name: OpenSSF Scorecard
 on:
   push:
     branches: ["main"]
-  # Branch protection changes do not trigger a push: this event keeps the score current.
+  # Scorecard's recommended trigger; the weekly run also catches ruleset changes.
   branch_protection_rule:
   schedule:
     - cron: "41 5 * * 1"
