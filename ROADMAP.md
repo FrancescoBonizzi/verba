@@ -36,8 +36,9 @@ that completes it.
 - [x] Install full Xcode on the development Mac.
 - [x] Create `App/Verba.xcodeproj` (app target with App Sandbox, Quick Action extension) and
   `Packages/VerbaKit`, as described in `CLAUDE.md`.
-- [x] CI: build and test on a macOS runner, `swift format lint --strict`; add Swift to the CodeQL matrix and
-  the `swift` ecosystem to Dependabot; make the new checks required in the `main` ruleset.
+- [x] CI: build and test on a macOS runner, `swift format lint --strict`; add the `swift` ecosystem to
+  Dependabot; make the new checks required in the `main` ruleset.
+- [ ] Add Swift to the CodeQL matrix: blocked until CodeQL supports Swift 6.4 (issue #3).
 - [ ] **Verify the signing plan before building on it**: sign two different builds with the same self-signed
   certificate and check that a granted permission (Speech Recognition) survives the update, and that the
   Finder Quick Action loads.

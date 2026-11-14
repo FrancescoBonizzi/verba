@@ -23,13 +23,10 @@ jobs:
       fail-fast: false
       matrix:
         include:
+          # Swift is not analyzed yet: CodeQL supports up to Swift 6.3 and Verba needs 6.4 (issue #3).
           - language: actions
             runner: ubuntu-latest
             build-mode: none
-          # Swift needs the macOS 27 SDK: the same preview image as the Swift PR check.
-          - language: swift
-            runner: xcode-27
-            build-mode: manual
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -40,13 +37,6 @@ jobs:
           languages: ${{ matrix.language }}
           build-mode: ${{ matrix.build-mode }}
           queries: security-extended
-
-      - name: Build Swift code
-        if: matrix.build-mode == 'manual'
-        run: |
-          (cd Packages/VerbaKit && swift build)
-          xcodebuild -project App/Verba.xcodeproj -scheme Verba -configuration Debug \
-            -destination 'platform=macOS' CODE_SIGNING_ALLOWED=NO build
 
       - uses: github/codeql-action/analyze@33d7b85da1a04171e211befe2c739303b9a4c066 # v4.39.3
         with:
