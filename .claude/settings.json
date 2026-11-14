@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "allow": [
+      "Bash(swift build:*)",
+      "Bash(swift test:*)",
+      "Bash(swift format:*)",
+      "Bash(xcodebuild -project App/Verba.xcodeproj -scheme Verba:*)",
+      "Bash(actionlint:*)",
+      "Bash(zizmor:*)",
+      "Bash(shellcheck:*)"
+    ]
+  },
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "s=$(jq -r '.session_id // empty' 2>/dev/null); case \"$s\" in \"\" | *[!A-Za-z0-9-]*) exit 0 ;; esac; : >\"${TMPDIR:-/tmp}/verba-claude-edited-$s\"; exit 0"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "r=\"$(git rev-parse --show-toplevel)\" || exit 0; h=\"$r/.claude/hooks/format.sh\"; [ -x \"$h\" ] || exit 0; git -C \"$r\" diff --quiet origin/main -- .claude/hooks || exit 0; exec \"$h\"",
+            "timeout": 60,
+            "statusMessage": "Formatting changed file..."
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "r=\"$(git rev-parse --show-toplevel)\" || exit 0; h=\"$r/.claude/hooks/final-checks.sh\"; [ -x \"$h\" ] || exit 0; git -C \"$r\" diff --quiet origin/main -- .claude/hooks || exit 0; exec \"$h\"",
+            "timeout": 600,
+            "statusMessage": "Building and testing what this turn touched..."
+          }
+        ]
+      }
+    ]
+  }
+}

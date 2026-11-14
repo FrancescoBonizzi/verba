@@ -1,0 +1,35 @@
+name: PR - Title
+
+on:
+  pull_request:
+    branches: ["main"]
+    # "edited" because the title can change after opening; "synchronize" re-reports on the latest commit,
+    # so the check stays valid as a required one.
+    types: [opened, edited, reopened, synchronize]
+
+# The title comes from the event: no checkout and no repository permission needed.
+permissions: {}
+
+jobs:
+  conventional_title:
+    name: "PR - Title: Conventional Commits"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Conventional Commits prefix
+        env:
+          # The title is text written by whoever opens the PR: it goes through env, never interpolated in
+          # the script, or it becomes executable code.
+          PR_TITLE: ${{ github.event.pull_request.title }}
+        run: |
+          # The squash merge uses the PR title as the commit message on main.
+          if printf '%s' "$PR_TITLE" | grep -Eq '^(feat|fix|chore|refactor|perf|docs|test|ci|build|style|revert)(\([^)]+\))?!?: .+'; then
+            printf 'Title OK: %s\n' "$PR_TITLE"
+            exit 0
+          fi
+          printf '::error::The PR title does not follow Conventional Commits: "%s"\n' "$PR_TITLE"
+          cat <<'MSG'
+          Expected: type(scope): imperative description
+            types: feat, fix, chore, refactor, perf, docs, test, ci, build, style, revert
+            e.g.:  fix(transcription): keep the last second of Opus voice notes
+          MSG
+          exit 1
