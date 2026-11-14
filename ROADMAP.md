@@ -47,11 +47,11 @@ that completes it.
 - [x] **Verify the GitHub macOS runners have an Xcode with the macOS 27 SDK**; if not, decide between a
   self-hosted runner and lowering the deployment target.
 
-Exit: an empty app builds and launches from CI artifacts on a clean Mac, and the three checks above have a
+Exit: an empty app builds, and an ad-hoc signed Release build launches on a clean Mac, and the three checks above have a
 written answer here.
 
-**Status: not exited.** Left for the maintainer: launch the CI artifact on a Mac other than the development
-one, check the Quick Action in Finder, and the signing check above (in M2).
+**Status: not exited.** Left for the maintainer: launch the CI-built app on a Mac other than the development
+one (PR #2's artifact `Verba-aeae3995…`, until it expires on 2026-11-28; PRs no longer publish one), check the Quick Action in Finder, and the signing check above (in M2).
 
 What the checks found:
 
