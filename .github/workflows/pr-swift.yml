@@ -34,19 +34,11 @@ jobs:
 
       - name: Build the app
         # Signed ad hoc, as the project says: no key needed, and the entitlements (the sandbox) are applied, so
-        # the artifact behaves like the real app. The release workflow is the only place that signs with a key.
+        # the signature check below sees what the real app carries. PRs publish no build: distribution happens
+        # only through the release workflow, the only place that signs with a key.
         run: >-
           xcodebuild -project App/Verba.xcodeproj -scheme Verba -configuration Release
           -destination 'platform=macOS' -derivedDataPath build build
 
-      - name: Verify the signature and package the app
-        run: |
-          codesign --verify --deep --strict build/Build/Products/Release/Verba.app
-          ditto -c -k --keepParent build/Build/Products/Release/Verba.app Verba.zip
-
-      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
-        with:
-          name: Verba-${{ github.event.pull_request.head.sha }}
-          path: Verba.zip
-          retention-days: 14
-          if-no-files-found: error
+      - name: Verify the signature
+        run: codesign --verify --deep --strict build/Build/Products/Release/Verba.app
