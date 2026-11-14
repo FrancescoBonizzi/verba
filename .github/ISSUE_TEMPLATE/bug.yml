@@ -1,0 +1,23 @@
+name: Bug
+description: Something Verba does wrong.
+labels: ["bug"]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happens
+      description: What you see and what you expected instead.
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: How to reproduce
+      description: The steps, and the kind of file involved (format, length, language). Do not attach private recordings or documents.
+  - type: input
+    id: version
+    attributes:
+      label: Versions
+      description: Verba version, macOS version, Mac model.
+    validations:
+      required: true

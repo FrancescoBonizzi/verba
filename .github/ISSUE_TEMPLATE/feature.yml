@@ -1,0 +1,16 @@
+name: Feature request
+description: Something Verba should do.
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: The problem
+      description: What you are trying to do today and where it goes wrong. Describe the problem before the solution.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposal
+      description: Optional. Verba keeps settings to a minimum and never sends data off the Mac; proposals that need either are unlikely to land.
