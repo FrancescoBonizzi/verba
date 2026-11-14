@@ -22,7 +22,7 @@ reopen them: when one changes, this file changes in the same PR.
 | Transcription engine | Chosen by the M1 benchmark | No public data on noisy, spontaneous Italian voice notes | — |
 | OCR | Apple Vision first; a local VLM only where it beats Vision on real documents | Vision is free, instant and installed; a VLM is gigabytes to download | — |
 | Distribution | GitHub Releases only, no App Store | — | — |
-| Signing | A stable self-signed certificate, no Apple Developer ID | No yearly fee for a free project. Cost: macOS asks to confirm the first launch once (Privacy & Security → Open Anyway) | the self-signed identity does not keep permissions across updates (verified in M0) |
+| Signing | A stable self-signed certificate, no Apple Developer ID | No yearly fee for a free project. Cost: macOS asks to confirm the first launch once (Privacy & Security → Open Anyway) | the self-signed identity does not keep permissions across updates (verified in M0): then compare paying for a Developer ID with other packaging. An Electron app is not a way out: it hits the same Gatekeeper and permission rules, and loses the native APIs Verba is built on |
 | License | MIT | Same as the main dependencies; no restriction on reuse | — |
 | Language | Everything in English; UI in English and Italian | Open to any contributor | — |
 
@@ -62,6 +62,9 @@ Candidates:
 | Whisper large-v3-turbo | WhisperKit (MIT) | ~1.6 GB, MIT | Built-in VAD; known to hallucinate on silence and to loop |
 | Parakeet TDT 0.6B v3 and Ultra | FluidAudio (Apache-2.0) | ~0.6 GB, CC-BY-4.0 (attribution) | ~25× faster than Whisper turbo; native punctuation |
 | Voxtral Mini (optional) | mlx-audio-swift | ~2.3 GB at 4-bit | Best public Italian score; include only if the Swift port runs |
+
+whisper.cpp is not a separate candidate: it runs the same Whisper weights as WhisperKit, through a C bridge
+instead of native Swift and Core ML, so measuring Whisper once is enough.
 
 What public data says (FLEURS Italian, read speech, word error rate; lower is better):
 
@@ -117,6 +120,9 @@ for M4.
 
 - GLM-OCR through `mlx-swift-lm` (MIT code, MIT weights, officially supported, MLX weights ready).
   Markdown output with tables.
+- Qwen3-VL (4B or 8B, also supported by `mlx-swift-lm`) as the general-purpose alternative, measured in
+  the same benchmark: several times larger than GLM-OCR, so it earns its download only where GLM-OCR fails,
+  for example on handwriting.
 - Benchmark against Vision on the M3 failure set: tables, multi-column layouts, handwriting.
 - The VLM is offered only for documents where it wins, and is downloaded only when first needed.
 
@@ -135,8 +141,10 @@ Exit: someone who is not the maintainer installs Verba from a release, following
 
 Not planned. Each one says what would bring it back.
 
-- **Global dictation** (hotkey, record, paste into the active app). Comes back if M1 shows that Apple's
-  dictation engine is clearly worse than the winner on real voice notes.
+- **Global dictation** (hotkey, record, paste into the active app). The question behind it: is macOS's
+  built-in dictation good enough, given that the one on an older iPhone is not? M1 measures Apple's
+  dictation engine (`DictationTranscriber`) on real voice notes; dictation comes back if it is clearly
+  worse than the winner.
 - **Meeting notes** (system audio through ScreenCaptureKit, microphone and others on separate tracks).
   Comes back after M2 is in daily use.
 - **Summaries with a local LLM.** Out: summaries go to a frontier LLM anyway.

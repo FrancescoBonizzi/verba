@@ -89,7 +89,9 @@ A test is code to maintain and gate time on every future PR.
   (checked by the `PR - Title` workflow): the squash uses it as the commit message on `main`.
 - PR description: [`.github/pull_request_template.md`](.github/pull_request_template.md), `Closes #<issue>`
   when there is one. Write it for whoever lands on it from `git blame` in a year.
-- **Before opening a PR: one code review and one security review of the diff, one pass each**, directed
+- **Before opening a PR, merge a just-fetched `origin/main` into the branch** (a merge, never a rebase on a
+  pushed branch), so conflicts surface locally and the reviews read what will land. Then **one code review
+  and one security review of the diff, one pass each**, directed
   by [`REVIEW.md`](REVIEW.md) (review tools do not read it by themselves: hand it over). Skip them only
   when the diff cannot change what the system does (docs, comments, agent configuration) and say so in
   the PR. CI, permissions, entitlements, signing and model downloads always get both. Open the PR only
