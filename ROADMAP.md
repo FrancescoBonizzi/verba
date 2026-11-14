@@ -28,21 +28,22 @@ reopen them: when one changes, this file changes in the same PR.
 
 ## Milestones
 
-Each milestone ends with its exit criteria met, not with its list done.
+Each milestone ends with its exit criteria met, not with its list done. An item is checked in the PR
+that completes it.
 
 ### M0 — Foundations
 
-- Install full Xcode on the development Mac.
-- Create `App/Verba.xcodeproj` (app target with App Sandbox, Quick Action extension) and
+- [x] Install full Xcode on the development Mac.
+- [ ] Create `App/Verba.xcodeproj` (app target with App Sandbox, Quick Action extension) and
   `Packages/VerbaKit`, as described in `CLAUDE.md`.
-- CI: build and test on a macOS runner, `swift format lint --strict`; add Swift to the CodeQL matrix and
+- [ ] CI: build and test on a macOS runner, `swift format lint --strict`; add Swift to the CodeQL matrix and
   the `swift` ecosystem to Dependabot; make the new checks required in the `main` ruleset.
-- **Verify the signing plan before building on it**: sign two different builds with the same self-signed
+- [ ] **Verify the signing plan before building on it**: sign two different builds with the same self-signed
   certificate and check that a granted permission (Speech Recognition) survives the update, and that the
   Finder Quick Action loads.
-- **Verify the sandbox can write the `.txt` next to the dropped file** (sandbox "related items"), or
+- [ ] **Verify the sandbox can write the `.txt` next to the dropped file** (sandbox "related items"), or
   decide where the output goes instead.
-- **Verify the GitHub macOS runners have an Xcode with the macOS 27 SDK**; if not, decide between a
+- [ ] **Verify the GitHub macOS runners have an Xcode with the macOS 27 SDK**; if not, decide between a
   self-hosted runner and lowering the deployment target.
 
 Exit: an empty app builds and launches from CI artifacts on a clean Mac, and the three checks above have a
@@ -97,43 +98,43 @@ An engine joins the app only if it wins on something the others do not cover.
 
 ### M2 — Transcribe audio files
 
-- Drop on the window or the Dock icon, or the Finder Quick Action.
-- Language: Italian or English chosen explicitly, default from the system language. Auto-detection is off
+- [ ] Drop on the window or the Dock icon, or the Finder Quick Action.
+- [ ] Language: Italian or English chosen explicitly, default from the system language. Auto-detection is off
   by default: on short voice notes it guesses wrong.
-- If the engine is Whisper: VAD to cut silence and loop detection on the output.
-- Output: text in the clipboard and a `.txt` next to the file. **An existing file is never overwritten**:
+- [ ] If the engine is Whisper: VAD to cut silence and loop detection on the output.
+- [ ] Output: text in the clipboard and a `.txt` next to the file. **An existing file is never overwritten**:
   the new one gets a numbered name.
-- Model download manager (if the engine needs weights): pinned revision, SHA-256 check, progress, resume,
+- [ ] Model download manager (if the engine needs weights): pinned revision, SHA-256 check, progress, resume,
   delete from the app.
 
 Exit: a week of daily use on real voice notes without falling back to another tool.
 
 ### M3 — OCR with Apple Vision
 
-- Images, screenshots and PDFs (pages rendered through PDFKit; text PDFs read directly).
-- Output: plain text in the clipboard and a `.txt`, same rules as M2.
+- [ ] Images, screenshots and PDFs (pages rendered through PDFKit; text PDFs read directly).
+- [ ] Output: plain text in the clipboard and a `.txt`, same rules as M2.
 
 Exit: screenshots and simple documents come out right; a set of documents where Vision fails is collected
 for M4.
 
 ### M4 — OCR for complex documents
 
-- GLM-OCR through `mlx-swift-lm` (MIT code, MIT weights, officially supported, MLX weights ready).
+- [ ] GLM-OCR through `mlx-swift-lm` (MIT code, MIT weights, officially supported, MLX weights ready).
   Markdown output with tables.
-- Qwen3-VL (4B or 8B, also supported by `mlx-swift-lm`) as the general-purpose alternative, measured in
+- [ ] Qwen3-VL (4B or 8B, also supported by `mlx-swift-lm`) as the general-purpose alternative, measured in
   the same benchmark: several times larger than GLM-OCR, so it earns its download only where GLM-OCR fails,
   for example on handwriting.
-- Benchmark against Vision on the M3 failure set: tables, multi-column layouts, handwriting.
-- The VLM is offered only for documents where it wins, and is downloaded only when first needed.
+- [ ] Benchmark against Vision on the M3 failure set: tables, multi-column layouts, handwriting.
+- [ ] The VLM is offered only for documents where it wins, and is downloaded only when first needed.
 
 Exit: the M3 failure set comes out usable, with numbers on time and memory.
 
 ### M5 — Releases
 
-- A release workflow: build, sign with the self-signed certificate (key in GitHub secrets, used only by
+- [ ] A release workflow: build, sign with the self-signed certificate (key in GitHub secrets, used only by
   that workflow, in a protected environment), zip, SHA-256, build provenance attestation, GitHub Release.
-- Install notes in the README: first launch, how to verify the archive and the certificate.
-- `THIRD_PARTY_NOTICES.md` with every dependency and model license (Parakeet's CC-BY-4.0 attribution).
+- [ ] Install notes in the README: first launch, how to verify the archive and the certificate.
+- [ ] `THIRD_PARTY_NOTICES.md` with every dependency and model license (Parakeet's CC-BY-4.0 attribution).
 
 Exit: someone who is not the maintainer installs Verba from a release, following only the README.
 
