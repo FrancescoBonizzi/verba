@@ -49,6 +49,9 @@ that completes it.
 Exit: an empty app builds and launches from CI artifacts on a clean Mac, and the three checks above have a
 written answer here.
 
+**Status: not exited.** Left for the maintainer: launch the CI artifact on a Mac other than the development
+one, check the Quick Action in Finder, and the signing check above (in M2).
+
 What the checks found:
 
 - **Signing.** A self-signed code-signing certificate gives every build the same designated requirement
@@ -57,8 +60,10 @@ What the checks found:
   hardened runtime on launches when signed ad hoc (verified); with the self-signed certificate it is
   deduced, not yet run. A Debug build with the runtime on crashes at launch, so Debug keeps it off. The Quick Action extension registers with
   the system (`pluginkit -m -i io.github.francescobonizzi.verba.QuickAction`) without the app being in
-  `/Applications`. **Still to verify by hand**, because they need someone at the screen: that a granted
-  Speech Recognition permission survives an update, and that the action shows in Finder's Quick Actions.
+  `/Applications`. **Still to verify by hand**, because they need someone at the screen: that the action
+  shows in Finder's Quick Actions, and that a granted Speech Recognition permission survives an update.
+  The second needs an app that asks for the permission, so it moves to M2: create the self-signed
+  certificate, sign two different M2 builds with it, grant the permission on the first, install the second.
 - **Sandbox.** A sandboxed app that receives `note.ogg` can write `note.txt` next to it, through "related
   items": the `.txt` type declared with `NSIsRelatedItemType`, and an `NSFilePresenter` whose primary item
   is the audio file (verified with `open -a`). It works only for the same base name, so the numbered name
@@ -152,9 +157,10 @@ Exit: the M3 failure set comes out usable, with numbers on time and memory.
 
 ### M5 — Releases
 
-- [ ] A release workflow: build, sign with the self-signed certificate (imported into a temporary keychain
-  with `security set-key-partition-list`, or codesign stops on a keychain access prompt nobody can click) (key in GitHub secrets, used only by
+- [ ] A release workflow: build, sign with the self-signed certificate (key in GitHub secrets, used only by
   that workflow, in a protected environment), zip, SHA-256, build provenance attestation, GitHub Release.
+  The key goes into a temporary keychain with `security set-key-partition-list`, or codesign stops on a
+  keychain access prompt that nobody can click.
 - [ ] Install notes in the README: first launch, how to verify the archive and the certificate.
 - [ ] `THIRD_PARTY_NOTICES.md` with every dependency and model license (Parakeet's CC-BY-4.0 attribution).
 
